@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "whisperlink_backend/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/staticfiles/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "whisperlink_backend/wsgi.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "whisperlink_backend.settings",
+    "PYTHONPATH": "/var/task"
+  },
+  "installCommand": "pip3 install -r requirements.txt",
+  "buildCommand": "python3 manage.py collectstatic --noinput"
+}
