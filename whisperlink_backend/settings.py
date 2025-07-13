@@ -33,12 +33,9 @@ DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 ALLOWED_HOSTS = ['*'] if DEBUG else [
     'localhost',
     '127.0.0.1',
-    '.vercel.app',
-    '.now.sh',
-    os.getenv('VERCEL_URL', ''),
+    '.railway.app',
+    os.getenv('RAILWAY_STATIC_URL', ''),
     os.getenv('ALLOWED_HOST', ''),
-    'whisperlink.vercel.app',
-    'whisperlink-backend.vercel.app'
 ]
 
 
@@ -94,11 +91,11 @@ WSGI_APPLICATION = 'whisperlink_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'postgres'),
-        'USER': os.getenv('DB_USER', 'postgres.rpptvbcjrytijmfqvndj'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'Stevoh@Stevoh2020.'),
-        'HOST': os.getenv('DB_HOST', 'aws-0-eu-north-1.pooler.supabase.com'),
-        'PORT': os.getenv('DB_PORT', '6543'),
+        'NAME': os.getenv('PGDATABASE', os.getenv('DB_NAME', 'postgres')),
+        'USER': os.getenv('PGUSER', os.getenv('DB_USER', 'postgres.rpptvbcjrytijmfqvndj')),
+        'PASSWORD': os.getenv('PGPASSWORD', os.getenv('DB_PASSWORD', 'Stevoh@Stevoh2020.')),
+        'HOST': os.getenv('PGHOST', os.getenv('DB_HOST', 'aws-0-eu-north-1.pooler.supabase.com')),
+        'PORT': os.getenv('PGPORT', os.getenv('DB_PORT', '6543')),
         'OPTIONS': {
             'sslmode': 'require',
             'connect_timeout': 10,
